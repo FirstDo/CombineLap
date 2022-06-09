@@ -4,5 +4,7 @@
 ### [MVVM](https://github.com/FirstDo/lab/tree/MVVM)
 ### [MVVM with Custom Publisher](https://github.com/FirstDo/lab/tree/MVVM_Custom)
 
-## [UIControl + Combine](https://github.com/FirstDo/CombineLap/tree/UIControl+Combine)
+## UIControl + Combine 바인딩하기
+
+### [UIControl + Combine](https://github.com/FirstDo/CombineLap/tree/UIControl+Combine)
 
