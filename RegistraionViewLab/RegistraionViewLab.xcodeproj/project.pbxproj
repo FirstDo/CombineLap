@@ -13,6 +13,7 @@
 		945D39E52850C73C006A6C46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 945D39E42850C73C006A6C46 /* Assets.xcassets */; };
 		945D39E82850C73C006A6C46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 945D39E62850C73C006A6C46 /* LaunchScreen.storyboard */; };
 		945D39F02851B716006A6C46 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D39EF2851B716006A6C46 /* MainViewModel.swift */; };
+		945D39F22851BD51006A6C46 /* UIControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D39F12851BD51006A6C46 /* UIControl+Combine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		945D39E72850C73C006A6C46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		945D39E92850C73C006A6C46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		945D39EF2851B716006A6C46 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		945D39F12851BD51006A6C46 /* UIControl+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Combine.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +62,20 @@
 				945D39DD2850C739006A6C46 /* SceneDelegate.swift */,
 				945D39DF2850C739006A6C46 /* MainViewController.swift */,
 				945D39EF2851B716006A6C46 /* MainViewModel.swift */,
+				945D39F32851E88E006A6C46 /* UIControl+Combine */,
 				945D39E42850C73C006A6C46 /* Assets.xcassets */,
 				945D39E62850C73C006A6C46 /* LaunchScreen.storyboard */,
 				945D39E92850C73C006A6C46 /* Info.plist */,
 			);
 			path = RegistraionViewLab;
+			sourceTree = "<group>";
+		};
+		945D39F32851E88E006A6C46 /* UIControl+Combine */ = {
+			isa = PBXGroup;
+			children = (
+				945D39F12851BD51006A6C46 /* UIControl+Combine.swift */,
+			);
+			path = "UIControl+Combine";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 				945D39E02850C739006A6C46 /* MainViewController.swift in Sources */,
 				945D39DC2850C739006A6C46 /* AppDelegate.swift in Sources */,
 				945D39DE2850C739006A6C46 /* SceneDelegate.swift in Sources */,
+				945D39F22851BD51006A6C46 /* UIControl+Combine.swift in Sources */,
 				945D39F02851B716006A6C46 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

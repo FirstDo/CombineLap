@@ -56,10 +56,6 @@ class MainViewController: UIViewController {
     
     // MARK: - Binding Property
     
-    private let user = PassthroughSubject<String, Never>()
-    private let password = PassthroughSubject<String, Never>()
-    private let passwordAgaing = PassthroughSubject<String, Never>()
-    
     private var cancellables = Set<AnyCancellable>()
     private let viewModel = MainViewModel()
     
@@ -67,7 +63,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         setView()
         setLayout()
-        addTarget()
         bind(to: viewModel)
     }
     
@@ -83,33 +78,15 @@ class MainViewController: UIViewController {
         ])
     }
     
-    private func addTarget() {
-        userTextField.addTarget(self, action: #selector(textFieldDidChange(sender:)), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(textFieldDidChange(sender:)), for: .editingChanged)
-        passwordAgainTextField.addTarget(self, action: #selector(textFieldDidChange(sender:)), for: .editingChanged)
-    }
-    
-    @objc private func textFieldDidChange(sender: UITextField) {
-        switch sender {
-        case userTextField:
-            user.send(sender.text!)
-        case passwordTextField:
-            password.send(sender.text!)
-        case passwordAgainTextField:
-            passwordAgaing.send(sender.text!)
-        default: break
-        }
-    }
-    
     private func bind(to viewModel: MainViewModel) {
         let input = MainViewModel.Input(
-            userName: user.eraseToAnyPublisher(),
-            password: password.eraseToAnyPublisher(),
-            passwordAgaing: passwordAgaing.eraseToAnyPublisher()
+            userName: userTextField.textPublisher.eraseToAnyPublisher(),
+            password: passwordTextField.textPublisher.eraseToAnyPublisher(),
+            passwordAgaing: passwordAgainTextField.textPublisher.eraseToAnyPublisher()
         )
         
         let output = viewModel.transform(input: input)
-        
+
         output
             .buttonIsValid
             .sink(receiveValue: { [weak self] state in
