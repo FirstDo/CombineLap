@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class MainViewController: UIViewController {
     
@@ -16,7 +17,6 @@ class MainViewController: UIViewController {
         stackview.translatesAutoresizingMaskIntoConstraints = false
         stackview.axis = .vertical
         stackview.spacing = 20
-        
         return stackview
     }()
     
@@ -54,11 +54,21 @@ class MainViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Binding Property
+    
+    private let user = PassthroughSubject<String, Never>()
+    private let password = PassthroughSubject<String, Never>()
+    private let passwordAgaing = PassthroughSubject<String, Never>()
+    
+    private var cancellables = Set<AnyCancellable>()
+    private let viewModel = MainViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setView()
         setLayout()
         addTarget()
+        bind(to: viewModel)
     }
     
     private func setView() {
@@ -80,19 +90,32 @@ class MainViewController: UIViewController {
     }
     
     @objc private func textFieldDidChange(sender: UITextField) {
-        if isValid() {
-            registerButton.backgroundColor = .systemOrange
-            registerButton.isEnabled = true
-        } else {
-            registerButton.backgroundColor = .systemGray
-            registerButton.isEnabled = false
+        switch sender {
+        case userTextField:
+            user.send(sender.text!)
+        case passwordTextField:
+            password.send(sender.text!)
+        case passwordAgainTextField:
+            passwordAgaing.send(sender.text!)
+        default: break
         }
     }
     
-    private func isValid() -> Bool {
-        return
-            userTextField.text!.count >= 4 &&
-            passwordTextField.text!.count >= 6 &&
-            passwordTextField.text == passwordAgainTextField.text
+    private func bind(to viewModel: MainViewModel) {
+        let input = MainViewModel.Input(
+            userName: user.eraseToAnyPublisher(),
+            password: password.eraseToAnyPublisher(),
+            passwordAgaing: passwordAgaing.eraseToAnyPublisher()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output
+            .buttonIsValid
+            .sink(receiveValue: { [weak self] state in
+                self?.registerButton.isEnabled = state
+                self?.registerButton.backgroundColor = state ? .systemOrange : .systemGray
+            })
+            .store(in: &cancellables)
     }
 }
